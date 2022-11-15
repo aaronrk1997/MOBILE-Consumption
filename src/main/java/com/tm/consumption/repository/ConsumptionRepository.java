@@ -10,4 +10,5 @@ public interface ConsumptionRepository extends MongoRepository<Consumption, Stri
     List<Consumption> findConsumptionsByUserId(Integer userId);
     List<Consumption> findConsumptionsByBeer(String beer);
     Consumption findConsumptionByUserIdAndBeer(Integer userid, String beer);
+    Consumption findIdContains(String id);
 }
