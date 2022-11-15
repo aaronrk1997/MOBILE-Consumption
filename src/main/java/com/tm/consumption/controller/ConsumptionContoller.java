@@ -34,15 +34,6 @@ public class ConsumptionContoller {
         return consumptionRepository.findConsumptionByUserIdAndBeer(userId, beer);
     }
 
-    @GetMapping("/consumptions/{id}")
-    public ResponseEntity<Consumption> getConsumptionById(@PathVariable String id) {
-        Consumption consumption = consumptionRepository.findIdContains(id);
-        if (consumption == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(consumption);
-    }
-
     @PostMapping("/consumptions")
     public Consumption createConsumption(@RequestBody Consumption consumption) {
         return consumptionRepository.save(consumption);
