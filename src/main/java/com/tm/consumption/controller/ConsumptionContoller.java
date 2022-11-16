@@ -34,6 +34,11 @@ public class ConsumptionContoller {
         return consumptionRepository.findConsumptionByUserIdAndBeerId(userId, beerId);
     }
 
+    @GetMapping("/consumptions/{id}")
+    public Consumption getConsumptionById(@PathVariable String id) {
+        return consumptionRepository.findConsumptionById(id);
+    }
+
     @PostMapping("/consumptions")
     public Consumption createConsumption(@RequestBody Consumption consumption) {
         return consumptionRepository.save(consumption);
