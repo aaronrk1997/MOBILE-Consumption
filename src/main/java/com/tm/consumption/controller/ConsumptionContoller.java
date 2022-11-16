@@ -46,16 +46,16 @@ public class ConsumptionContoller {
 
     @PutMapping("/consumptions")
     public Consumption updateConsumption(@RequestBody Consumption consumption) {
-        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeerId(consumption.getUserId(), consumption.getBeerId());
+        Consumption retrievedConsumption = consumptionRepository.findConsumptionById(consumption.getId());
         retrievedConsumption.setCount(consumption.getCount());
         retrievedConsumption.setScore(consumption.getScore());
         retrievedConsumption.setRemark(consumption.getRemark());
         return consumptionRepository.save(retrievedConsumption);
     }
 
-    @DeleteMapping("/consumptions/user/{userId}/beer/{beer}")
-    public ResponseEntity<?> deleteConsumption(@PathVariable String userId, @PathVariable String beerId) {
-        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeerId(userId, beerId);
+    @DeleteMapping("/consumptions/{id}")
+    public ResponseEntity<?> deleteConsumption(@PathVariable String id) {
+        Consumption retrievedConsumption = consumptionRepository.findConsumptionById(id);
         if(retrievedConsumption != null) {
             consumptionRepository.delete(retrievedConsumption);
             return ResponseEntity.ok().build();
