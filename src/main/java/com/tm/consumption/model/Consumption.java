@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Consumption{
     @Id
     private String id;
-    private Integer userId;
-    private String beer;
+    private String userId;
+    private String beerId;
     private Integer count;
     private Integer score;
     private String remark;
@@ -19,9 +19,9 @@ public class Consumption{
     public Consumption() {
     }
 
-    public Consumption(Integer userId, String beer, Integer count, Integer score, String remark) {
+    public Consumption(String userId, String beerId, Integer count, Integer score, String remark) {
         setUserId(userId);
-        setBeer(beer);
+        setBeerId(beerId);
         setCount(count);
         setScore(score);
         setRemark(remark);
@@ -36,20 +36,20 @@ public class Consumption{
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getBeer() {
-        return beer;
+    public String getBeerId() {
+        return beerId;
     }
 
-    public void setBeer(String beer) {
-        this.beer = beer;
+    public void setBeerId(String beerId) {
+        this.beerId = beerId;
     }
 
     public Integer getCount() {

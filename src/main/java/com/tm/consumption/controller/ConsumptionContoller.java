@@ -20,18 +20,18 @@ public class ConsumptionContoller {
     }
 
     @GetMapping("/consumptions/user/{userId}")
-    public List<Consumption> getConsumptionsByUserId(@PathVariable Integer userId) {
+    public List<Consumption> getConsumptionsByUserId(@PathVariable String userId) {
         return consumptionRepository.findConsumptionsByUserId(userId);
     }
 
-    @GetMapping("/consumptions/{beer}")
-    public List<Consumption> getConsumptionsByBeer(@PathVariable String beer) {
-        return consumptionRepository.findConsumptionsByBeer(beer);
+    @GetMapping("/consumptions/beer/{beerId}")
+    public List<Consumption> getConsumptionsByBeer(@PathVariable String beerId) {
+        return consumptionRepository.findConsumptionsByBeerId(beerId);
     }
 
-    @GetMapping("/consumptions/user/{userId}/beer/{beer}")
-    public Consumption getConsumptionByUserIdAndBeer(@PathVariable Integer userId, @PathVariable String beer) {
-        return consumptionRepository.findConsumptionByUserIdAndBeer(userId, beer);
+    @GetMapping("/consumptions/user/{userId}/beer/{beerId}")
+    public Consumption getConsumptionByUserIdAndBeer(@PathVariable String userId, @PathVariable String beerId) {
+        return consumptionRepository.findConsumptionByUserIdAndBeerId(userId, beerId);
     }
 
     @PostMapping("/consumptions")
@@ -41,7 +41,7 @@ public class ConsumptionContoller {
 
     @PutMapping("/consumptions")
     public Consumption updateConsumption(@RequestBody Consumption consumption) {
-        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeer(consumption.getUserId(), consumption.getBeer());
+        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeerId(consumption.getUserId(), consumption.getBeerId());
         retrievedConsumption.setCount(consumption.getCount());
         retrievedConsumption.setScore(consumption.getScore());
         retrievedConsumption.setRemark(consumption.getRemark());
@@ -49,8 +49,8 @@ public class ConsumptionContoller {
     }
 
     @DeleteMapping("/consumptions/user/{userId}/beer/{beer}")
-    public ResponseEntity<?> deleteConsumption(@PathVariable Integer userId, @PathVariable String beer) {
-        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeer(userId, beer);
+    public ResponseEntity<?> deleteConsumption(@PathVariable String userId, @PathVariable String beerId) {
+        Consumption retrievedConsumption = consumptionRepository.findConsumptionByUserIdAndBeerId(userId, beerId);
         if(retrievedConsumption != null) {
             consumptionRepository.delete(retrievedConsumption);
             return ResponseEntity.ok().build();
