@@ -44,9 +44,9 @@ public class ConsumptionContoller {
         return consumptionRepository.save(consumption);
     }
 
-    @PutMapping("/consumptions")
-    public Consumption updateConsumption(@RequestBody Consumption consumption) {
-        Consumption retrievedConsumption = consumptionRepository.findConsumptionById(consumption.getId());
+    @PutMapping("/consumptions/{id}")
+    public Consumption updateConsumption(@RequestBody Consumption consumption, @PathVariable String id) {
+        Consumption retrievedConsumption = consumptionRepository.findConsumptionById(id);
         retrievedConsumption.setCount(consumption.getCount());
         retrievedConsumption.setScore(consumption.getScore());
         retrievedConsumption.setRemark(consumption.getRemark());
